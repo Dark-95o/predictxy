@@ -63,8 +63,11 @@ Real-time cryptocurrency price prediction platform with gamification, leaderboar
 
 ## Screenshots
 
-### CI/CD Pipeline
+### Demo Video
+[Video Link](https://drive.google.com/file/d/1_NAP73ijQghTsTVLjMStTjxt6tHC4YrN/view?usp=sharing)
 
+### CI/CD Pipeline
+<img width="1808" height="557" alt="image" src="https://github.com/user-attachments/assets/d64a9efc-4e89-494f-b932-9dd81febffa9" />
 
 ### Mobile UI
 <img width="501" height="931" alt="image" src="https://github.com/user-attachments/assets/319df4b2-f96e-4b2d-b2aa-b5b83a2627da" />
