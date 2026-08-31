@@ -61,6 +61,20 @@ Real-time cryptocurrency price prediction platform with gamification, leaderboar
 
 ---
 
+## Screenshots
+
+### CI/CD Pipeline
+
+
+### Mobile UI
+<img width="501" height="931" alt="image" src="https://github.com/user-attachments/assets/319df4b2-f96e-4b2d-b2aa-b5b83a2627da" />
+
+### Test Cases Passed
+<img width="630" height="390" alt="image" src="https://github.com/user-attachments/assets/11cb43be-0c6e-4a3e-bf0a-5ff3c02bf248" />
+
+
+---
+
 ## 🚀 Getting Started
 
 1. **Install Dependencies**:
