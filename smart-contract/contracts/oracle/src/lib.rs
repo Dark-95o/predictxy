@@ -55,3 +55,31 @@ impl PriceOracleContract {
         storage.get::<_, i128>(&Symbol::new(&env, "latest_price")).unwrap_or(0)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use soroban_sdk::{Env, Address, String};
+
+    #[test]
+    fn test_oracle_init_and_price_query() {
+        let env = Env::default();
+        let admin = Address::generate(&env);
+        PriceOracleContract::init(env.clone(), admin);
+        let price = PriceOracleContract::get_price(env.clone(), String::from_str(&env, "BTC"));
+        assert_eq!(price, 0);
+    }
+
+    #[test]
+    fn test_oracle_store_and_get_price() {
+        let env = Env::default();
+        let admin = Address::generate(&env);
+        env.mock_all_signatures();
+        PriceOracleContract::init(env.clone(), admin);
+        let res = PriceOracleContract::store_price(env.clone(), String::from_str(&env, "BTC"), 65000, 1700000000);
+        assert_eq!(res, true);
+        let price = PriceOracleContract::get_price(env.clone(), String::from_str(&env, "BTC"));
+        assert_eq!(price, 65000);
+    }
+}
+

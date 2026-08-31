@@ -80,3 +80,27 @@ impl PredictionStakingContract {
         true
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use soroban_sdk::{Env, String};
+
+    #[test]
+    fn test_prediction_creation() {
+        let env = Env::default();
+        PredictionStakingContract::init(env.clone());
+        let id = PredictionStakingContract::create_prediction(env.clone(), String::from_str(&env, "ETH"), 60, 3500, 1700000000);
+        assert_eq!(id, 1);
+    }
+
+    #[test]
+    fn test_prediction_settle() {
+        let env = Env::default();
+        PredictionStakingContract::init(env.clone());
+        let id = PredictionStakingContract::create_prediction(env.clone(), String::from_str(&env, "ETH"), 60, 3500, 1700000000);
+        let res = PredictionStakingContract::settle_prediction(env.clone(), id, 3600, String::from_str(&env, "up"));
+        assert_eq!(res, true);
+    }
+}
+

@@ -50,3 +50,23 @@ impl RewardsDistributionContract {
         (wins, losses, 0, win_rate)
     }
 }
+
+#[cfg(test)]
+mod test {
+    use super::*;
+    use soroban_sdk::{Env, Address};
+
+    #[test]
+    fn test_rewards_user_stats() {
+        let env = Env::default();
+        RewardsDistributionContract::init(env.clone());
+        let user = Address::generate(&env);
+        let updated = RewardsDistributionContract::update_user_stats(env.clone(), user.clone(), true, 500);
+        assert_eq!(updated, true);
+        let (wins, losses, _, win_rate) = RewardsDistributionContract::get_user_stats(env.clone(), user);
+        assert_eq!(wins, 1);
+        assert_eq!(losses, 0);
+        assert_eq!(win_rate, 100);
+    }
+}
+

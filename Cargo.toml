@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+
+members = [
+    "smart-contract/contracts/oracle",
+    "smart-contract/contracts/prediction",
+    "smart-contract/contracts/rewards",
+]
