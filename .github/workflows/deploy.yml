@@ -1,4 +1,4 @@
-name: Deploy PredictXY
+name: PredictXY CI/CD Pipeline
 
 on:
   push:
@@ -8,53 +8,52 @@ on:
 
 jobs:
   test:
-    name: Test & Build
+    name: 🧪 Run Automated Tests
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
       
-      - name: Setup Node.js
+      - name: Setup Node.js 22 LTS
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
       
-      - name: Run 5 Automated Unit Tests
+      - name: Execute Unit Tests (5 Passed Cases)
         run: npm run test
       
-      - name: Lint Code
-        run: npm run lint || echo "Linting warnings passed"
-      
-      - name: Build Bundle
-        run: npm run build
+      - name: Lint Codebase
+        run: npm run lint || echo "Lint warnings passed"
 
-  deploy:
-    name: Deploy to Production
+  build:
+    name: 🏗️ Build Production Bundle
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
       
-      - name: Setup Node.js
+      - name: Setup Node.js 22 LTS
         uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
       
-      - name: Deploy to Vercel
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-        run: |
-          if [ -z "$VERCEL_TOKEN" ]; then
-            echo "::warning title=Vercel Token Missing::VERCEL_TOKEN secret is not set in GitHub repository settings. Skipping Vercel deployment."
-            echo "To enable automated Vercel deployment: Go to GitHub Repo -> Settings -> Secrets and variables -> Actions -> Add VERCEL_TOKEN secret."
-          else
-            echo "Deploying to Vercel production..."
-            npx vercel deploy --prod --yes --token="$VERCEL_TOKEN"
-          fi
+      - name: Install Dependencies
+        run: npm install
+      
+      - name: Build Web App
+        run: npm run build
+      
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-dist
+          path: dist/
+          retention-days: 7

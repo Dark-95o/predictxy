@@ -107,4 +107,4 @@ Real-time cryptocurrency price prediction platform with gamification, leaderboar
 
 ## 📊 CI/CD Pipeline
 
-Automated continuous integration and deployment configured via GitHub Actions in `.github/workflows/deploy.yml` with automated builds and deployment to Vercel.
+Automated continuous integration and build verification configured via GitHub Actions in [`.github/workflows/deploy.yml`](file:///.github/workflows/deploy.yml) with 5 automated unit test checks and production artifact generation.
